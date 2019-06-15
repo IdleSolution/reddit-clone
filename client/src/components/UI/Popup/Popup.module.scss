@@ -1,0 +1,21 @@
+.box {
+    width: 25%;
+    color: black;
+    position: fixed;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid black;
+    padding: .5rem 1rem;
+    text-align: center;
+    transition: all 1s;
+    font-size: 1rem;
+    
+}
+
+.hide {
+    visibility: hidden;
+    opacity: 0;
+}

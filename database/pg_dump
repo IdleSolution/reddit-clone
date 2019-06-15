@@ -1,0 +1,586 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.14
+-- Dumped by pg_dump version 9.5.14
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: comment_votes; Type: TABLE; Schema: public; Owner: idlesolution
+--
+
+CREATE TABLE public.comment_votes (
+    id integer NOT NULL,
+    comment_id bigint NOT NULL,
+    karma integer DEFAULT 0,
+    upvotes integer[],
+    downvotes integer[]
+);
+
+
+ALTER TABLE public.comment_votes OWNER TO idlesolution;
+
+--
+-- Name: comment_votes_id_seq; Type: SEQUENCE; Schema: public; Owner: idlesolution
+--
+
+CREATE SEQUENCE public.comment_votes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.comment_votes_id_seq OWNER TO idlesolution;
+
+--
+-- Name: comment_votes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: idlesolution
+--
+
+ALTER SEQUENCE public.comment_votes_id_seq OWNED BY public.comment_votes.id;
+
+
+--
+-- Name: comments; Type: TABLE; Schema: public; Owner: idlesolution
+--
+
+CREATE TABLE public.comments (
+    id integer NOT NULL,
+    text text NOT NULL,
+    user_id integer NOT NULL,
+    post_id integer NOT NULL,
+    date timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.comments OWNER TO idlesolution;
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: idlesolution
+--
+
+CREATE SEQUENCE public.comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.comments_id_seq OWNER TO idlesolution;
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: idlesolution
+--
+
+ALTER SEQUENCE public.comments_id_seq OWNED BY public.comments.id;
+
+
+--
+-- Name: post_votes; Type: TABLE; Schema: public; Owner: idlesolution
+--
+
+CREATE TABLE public.post_votes (
+    id integer NOT NULL,
+    post_id bigint NOT NULL,
+    karma integer DEFAULT 0,
+    upvotes integer[],
+    downvotes integer[]
+);
+
+
+ALTER TABLE public.post_votes OWNER TO idlesolution;
+
+--
+-- Name: post_votes_id_seq; Type: SEQUENCE; Schema: public; Owner: idlesolution
+--
+
+CREATE SEQUENCE public.post_votes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.post_votes_id_seq OWNER TO idlesolution;
+
+--
+-- Name: post_votes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: idlesolution
+--
+
+ALTER SEQUENCE public.post_votes_id_seq OWNED BY public.post_votes.id;
+
+
+--
+-- Name: posts; Type: TABLE; Schema: public; Owner: idlesolution
+--
+
+CREATE TABLE public.posts (
+    id integer NOT NULL,
+    title character varying(30),
+    text text NOT NULL,
+    user_id integer NOT NULL,
+    subreddit_id integer NOT NULL,
+    date timestamp without time zone NOT NULL,
+    comments_count integer DEFAULT 0
+);
+
+
+ALTER TABLE public.posts OWNER TO idlesolution;
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: idlesolution
+--
+
+CREATE SEQUENCE public.posts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.posts_id_seq OWNER TO idlesolution;
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: idlesolution
+--
+
+ALTER SEQUENCE public.posts_id_seq OWNED BY public.posts.id;
+
+
+--
+-- Name: subreddits; Type: TABLE; Schema: public; Owner: idlesolution
+--
+
+CREATE TABLE public.subreddits (
+    id integer NOT NULL,
+    name character varying(20) NOT NULL,
+    description text,
+    moderator integer NOT NULL
+);
+
+
+ALTER TABLE public.subreddits OWNER TO idlesolution;
+
+--
+-- Name: subreddit_id_seq; Type: SEQUENCE; Schema: public; Owner: idlesolution
+--
+
+CREATE SEQUENCE public.subreddit_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.subreddit_id_seq OWNER TO idlesolution;
+
+--
+-- Name: subreddit_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: idlesolution
+--
+
+ALTER SEQUENCE public.subreddit_id_seq OWNED BY public.subreddits.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: idlesolution
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    username character varying(16) NOT NULL,
+    password text NOT NULL,
+    email character varying(40) NOT NULL,
+    karma integer DEFAULT 0,
+    created_at date NOT NULL,
+    active boolean
+);
+
+
+ALTER TABLE public.users OWNER TO idlesolution;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: idlesolution
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO idlesolution;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: idlesolution
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.comment_votes ALTER COLUMN id SET DEFAULT nextval('public.comment_votes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.comments ALTER COLUMN id SET DEFAULT nextval('public.comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.post_votes ALTER COLUMN id SET DEFAULT nextval('public.post_votes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.posts ALTER COLUMN id SET DEFAULT nextval('public.posts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.subreddits ALTER COLUMN id SET DEFAULT nextval('public.subreddit_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: comment_votes; Type: TABLE DATA; Schema: public; Owner: idlesolution
+--
+
+COPY public.comment_votes (id, comment_id, karma, upvotes, downvotes) FROM stdin;
+9	34	0	{}	{}
+7	32	-1	{}	{82}
+8	33	-1	{}	{82}
+20	45	0	{}	{}
+21	46	0	{}	{}
+22	47	0	{}	{}
+23	48	0	{}	{}
+24	49	0	{}	{}
+10	35	0	{}	{}
+12	37	1	{82}	{}
+13	38	-1	{}	{82}
+14	39	-1	{}	{82}
+15	40	1	{82}	{}
+11	36	-1	{}	{82}
+18	43	-1	{}	{82}
+17	42	-1	{}	{82}
+19	44	-1	{}	{82}
+16	41	0	{}	{}
+25	50	0	{}	{}
+26	51	0	{}	{}
+27	52	0	{}	{}
+28	53	1	{82}	{}
+29	54	0	{}	{}
+30	55	0	{}	{}
+31	56	0	{}	{}
+\.
+
+
+--
+-- Name: comment_votes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: idlesolution
+--
+
+SELECT pg_catalog.setval('public.comment_votes_id_seq', 31, true);
+
+
+--
+-- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: idlesolution
+--
+
+COPY public.comments (id, text, user_id, post_id, date) FROM stdin;
+32	xD	82	82	2019-04-12 00:00:00
+33	rfgdfg	82	80	2019-04-13 00:00:00
+34	asa	82	79	2019-04-13 00:00:00
+35	zabka	82	83	2019-04-13 00:00:00
+36	ddd	82	78	2019-04-19 00:00:00
+37	xxx	82	83	2019-05-21 00:00:00
+38	xxxx	82	83	2019-05-21 00:00:00
+39	xxx	82	83	2019-05-21 00:00:00
+40	xx	82	83	2019-05-21 00:00:00
+41	sfsaf	82	83	2019-05-21 00:00:00
+42	xxx	82	83	2019-05-21 00:00:00
+43	xxxss	82	83	2019-05-21 00:00:00
+44	xxxss	82	83	2019-05-21 00:00:00
+45	ssffssafafs	82	83	2019-05-21 00:00:00
+46	fdgfdhdfhdfh	82	83	2019-05-21 00:00:00
+47	safasfasf	82	83	2019-05-21 00:00:00
+48	safsaf	82	83	2019-05-21 00:00:00
+49	safsafasaafsafaa	82	83	2019-05-21 00:00:00
+50	sdsaf	82	83	2019-05-21 00:00:00
+51	sss	82	72	2019-05-21 00:00:00
+52	dsfsdf	82	80	2019-05-22 00:00:00
+53	safasf	82	80	2019-05-22 10:24:56.856
+54	s	82	82	2019-05-22 19:50:26.07
+55	dsfsdfs	82	84	2019-05-22 19:50:44.21
+56	asfasfasfs	82	84	2019-05-22 19:51:56.88
+\.
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: idlesolution
+--
+
+SELECT pg_catalog.setval('public.comments_id_seq', 56, true);
+
+
+--
+-- Data for Name: post_votes; Type: TABLE DATA; Schema: public; Owner: idlesolution
+--
+
+COPY public.post_votes (id, post_id, karma, upvotes, downvotes) FROM stdin;
+24	63	0	{}	{}
+26	65	0	{}	{}
+27	66	0	{}	{}
+28	67	0	{}	{}
+29	68	0	{}	{}
+30	69	0	{}	{}
+31	70	0	{}	{}
+32	71	0	{}	{}
+33	72	0	{}	{}
+34	73	0	{}	{}
+35	74	0	{}	{}
+37	76	0	{}	{}
+25	64	1	{82}	{}
+38	77	1	{82}	{}
+41	80	1	{82}	{}
+39	78	0	{}	{}
+36	75	1	{82}	{}
+44	83	1	{82}	{}
+40	79	-1	{}	{82}
+42	81	0	{}	{}
+45	84	1	{82}	{}
+43	82	1	{82}	{}
+\.
+
+
+--
+-- Name: post_votes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: idlesolution
+--
+
+SELECT pg_catalog.setval('public.post_votes_id_seq', 45, true);
+
+
+--
+-- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: idlesolution
+--
+
+COPY public.posts (id, title, text, user_id, subreddit_id, date, comments_count) FROM stdin;
+63	Kappa	saafdsaf	82	16	2019-04-10 13:41:55.855	0
+64	Keepo	iaskdm	82	16	2019-04-10 13:42:04.286	0
+65	xDDDDD	asfsafas	82	16	2019-04-10 13:42:14.62	0
+66	Disstream	kljasadnsa	82	16	2019-04-10 13:42:19.355	0
+67	Xayoo	jsaklnds	82	16	2019-04-10 13:42:24.065	0
+68	Liga Legend	oiasdhnjsaowasqd	82	16	2019-04-10 13:42:29.79	0
+69	Dotka	iaksl;mjdsafdasaa	82	16	2019-04-10 13:42:38.515	0
+70	Fizzz	ikalsdmjaskldm	82	16	2019-04-10 13:42:47.499	0
+71	reddit	asikldjmjsad	82	16	2019-04-10 13:42:52.758	0
+72	React	oiaskldnasdas	82	16	2019-04-10 13:42:56.604	0
+73	Vueee	asfasfasfa	82	16	2019-04-10 13:43:00.37	0
+74	Javascript	ioaskdjmasdsasfa	82	16	2019-04-10 13:43:04.968	0
+75	Python	ioaSKHDNJDIASOKDNM	82	16	2019-04-10 13:43:09.388	0
+76	Javaa	isakjodmas;lsd	82	16	2019-04-10 13:43:15.297	0
+77	c####	asfaasfasfasfasfsa	82	16	2019-04-10 13:43:21.59	0
+78	spammers	ikasldfmasasf	82	16	2019-04-10 13:43:42.821	0
+79	Artifact	kalsdnmsaldmnas	82	16	2019-04-10 13:43:47.331	0
+80	Metin2?	lkasdm aslmd	82	16	2019-04-10 13:43:52.71	0
+81	gfdgfgd	fdhfdh	82	16	2019-04-12 21:59:05.449	0
+82	safasfassd	asfas	82	16	2019-04-12 22:01:48.733	0
+83	No co tam	Ziomeczki	82	17	2019-04-13 22:53:00.131	7
+84	asfasafaas	asafasfsa	82	16	2019-05-21 21:54:03.74	1
+\.
+
+
+--
+-- Name: posts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: idlesolution
+--
+
+SELECT pg_catalog.setval('public.posts_id_seq', 84, true);
+
+
+--
+-- Name: subreddit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: idlesolution
+--
+
+SELECT pg_catalog.setval('public.subreddit_id_seq', 18, true);
+
+
+--
+-- Data for Name: subreddits; Type: TABLE DATA; Schema: public; Owner: idlesolution
+--
+
+COPY public.subreddits (id, name, description, moderator) FROM stdin;
+15	asaafdasaa	asujinfasju\n	82
+16	asfas	safasf	82
+17	ikasmd	askidnm\n	82
+18	adsfgads	sdgsdg	82
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: idlesolution
+--
+
+COPY public.users (id, username, password, email, karma, created_at, active) FROM stdin;
+82	idlesolution	$2b$10$JPijo2qMgmPGSLRNOVk3e.k6g85MBiDrxk5gJ5A1K3FFrIK4QUvZG	idlesoluszyn@gmail.com	1	2019-03-26	t
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: idlesolution
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 82, true);
+
+
+--
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: subreddit_pkey; Type: CONSTRAINT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.subreddits
+    ADD CONSTRAINT subreddit_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comment_votes_comment_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.comment_votes
+    ADD CONSTRAINT comment_votes_comment_id_fkey FOREIGN KEY (comment_id) REFERENCES public.comments(id);
+
+
+--
+-- Name: comments_post_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT comments_post_id_fkey FOREIGN KEY (post_id) REFERENCES public.posts(id);
+
+
+--
+-- Name: comments_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.comments
+    ADD CONSTRAINT comments_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: post_votes_post_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.post_votes
+    ADD CONSTRAINT post_votes_post_id_fkey FOREIGN KEY (post_id) REFERENCES public.posts(id);
+
+
+--
+-- Name: posts_subreddit_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_subreddit_id_fkey FOREIGN KEY (subreddit_id) REFERENCES public.subreddits(id);
+
+
+--
+-- Name: posts_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: subreddits_moderator_fkey; Type: FK CONSTRAINT; Schema: public; Owner: idlesolution
+--
+
+ALTER TABLE ONLY public.subreddits
+    ADD CONSTRAINT subreddits_moderator_fkey FOREIGN KEY (moderator) REFERENCES public.users(id);
+
+
+--
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

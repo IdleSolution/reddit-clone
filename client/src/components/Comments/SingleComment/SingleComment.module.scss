@@ -1,0 +1,213 @@
+.container {
+    display: flex;
+    margin: 3rem 0;
+    word-wrap: break-word;
+}
+
+.main {
+    width: 70rem;
+    word-wrap: break-word;
+
+    // I hate my life, no it cant be percentages
+    @media (max-width: 1600px) {
+        width: 60rem;
+    }
+
+    @media (max-width: 1450px) {
+        width: 50rem;
+    }
+
+    @media (max-width: 1250px) {
+        width: 45rem;
+    }
+
+    @media (max-width: 1150px) {
+        width: 40rem;
+    }
+
+    @media (max-width: 1050px) {
+        width: 35rem;
+    }
+
+    @media (max-width: 950px) {
+        width: 30rem;
+    }
+
+    @media (max-width: 850px) {
+        width: 25rem;
+    }
+
+    @media (max-width: 750px) {
+        width: 30rem;
+    }
+
+    @media (max-width: 650px) {
+        width: 25rem;
+    }
+
+    @media (max-width: 550px) {
+        width: 20rem;
+    }
+
+    @media (max-width: 450px) {
+        width: 17rem;
+    }
+
+    @media (max-width: 370px) {
+        width: 16rem;
+    }
+}
+
+.mainInfo {
+    display: flex;
+    text-align: left;
+}
+
+.karma {
+    margin: 0 0.5rem;
+    color: gray;
+
+    @media (max-width: 1000px) {
+        width: 2.5rem;
+    }
+
+    @media (max-width: 800px) {
+        font-size: 0.6rem;
+    }
+
+    @media (max-width: 370px) {
+        width: 3rem;
+    }
+}
+
+.date {
+    color: gray;
+
+    @media (max-width: 1000px) {
+        width: 4rem;
+    }
+
+    @media (max-width: 800px) {
+        font-size: 0.6rem;
+        width: 5rem;
+    }
+}
+
+.username {
+    font-weight: normal;
+    color: rgb(206, 23, 19);
+    margin-top: -0.1rem;
+    position: relative;
+    z-index: 20;
+
+    @media (max-width: 800px) {
+        font-size: 0.8rem;
+    }
+}
+
+.text {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    word-wrap: break-word;
+    width: 100%;
+
+    @media(max-width: 1000px) {
+        width: 20rem;
+    }
+
+    @media (max-width: 900px) {
+        font-size: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 0.7rem;
+        width: 15rem;
+    }
+
+    @media(max-width: 350px) {
+        width: 12rem;
+    }
+}
+
+.profileContainer {
+    display: flex;
+    background: white;
+    border: 1px solid #000;
+    border-bottom: none;
+    cursor: pointer;
+    width: 100%;
+    padding-bottom: 1rem;
+    flex-flow: column;
+
+    // no effect for some reason
+    &:not(:last-child) {
+        border-bottom: none;
+    }
+}
+
+.commentInfo {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.commentDetails {
+    margin-left: 0.5rem;
+    color: gray;
+    display: flex;
+
+    @media (max-width: 600px) {
+        font-size: 0.6rem;
+    }
+
+    @media (max-width: 450px) {
+        font-size: 0.5rem;
+    }
+}
+
+.icon {
+    margin: 0 1%;
+    color: gray;
+}
+
+.link {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.subredditName {
+    margin-left: 1rem;
+    font-weight: 700;
+    z-index: 20;
+
+    @media (max-width: 550px) {
+        font-size: 0.7rem;
+    }
+
+    @media (max-width: 370px) {
+        font-size: 0.55rem;
+    }
+}
+
+.postName {
+    color: #000;
+    margin-left: 0.3rem;
+
+
+    @media (max-width: 550px) {
+        font-size: 0.8rem;
+    }
+
+    @media (max-width: 400px) {
+        font-size: 0.7rem;
+    }
+}

@@ -1,0 +1,23 @@
+.newCommentContainer {
+    width: 100%;
+    margin-top: 2%;
+    font-size: 1rem;
+    position: relative;
+}
+
+.error {
+    color: red;
+    height: 1rem;
+    margin-left: 30%;
+    margin-top: 1rem;
+
+    @media(max-width: 600px) {
+        font-size: .7rem;
+    }
+}
+
+.commentAs {
+    @media(max-width: 600px) {
+        font-size: .6rem;
+    }
+}

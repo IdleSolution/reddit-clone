@@ -1,0 +1,134 @@
+.container {
+    padding: 0.5rem 0;
+    width: 70rem;
+    display: flex;
+    background: #fff;
+    border: 1px solid #000;
+    cursor: pointer;
+
+    // Neccesarry evil, DONT try to make it percentages
+    @media (max-width: 1600px) {
+        width: 60rem;
+    }
+
+    @media (max-width: 1450px) {
+        width: 50rem;
+    }
+
+    @media (max-width: 1250px) {
+        width: 45rem;
+    }
+
+    @media (max-width: 1150px) {
+        width: 40rem;
+    }
+
+    @media (max-width: 1050px) {
+        width: 35rem;
+    }
+
+    @media (max-width: 950px) {
+        width: 30rem;
+    }
+
+    @media (max-width: 850px) {
+        width: 25rem;
+    }
+
+    @media (max-width: 750px) {
+        width: 30rem;
+    }
+
+    @media (max-width: 650px) {
+        width: 25rem;
+    }
+
+    @media (max-width: 550px) {
+        width: 20rem;
+    }
+
+    @media (max-width: 450px) {
+        width: 17rem;
+    }
+
+    @media (max-width: 370px) {
+        width: 16rem;
+    }
+
+    &:not(:last-child) {
+        border-bottom: none;
+    }
+}
+
+.heading {
+    font-size: 1.3rem;
+    font-weight: normal;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    margin: 0.3rem 0;
+}
+
+.subreddit {
+    font-weight: 700;
+    margin-right: 0.4rem;
+    font-size: 0.8rem;
+    border-bottom: 1px solid transparent;
+    position: relative;
+    z-index: 30;
+
+    @media (max-width: 750px) {
+        font-size: 0.6rem;
+    }
+
+    &:hover {
+        border-bottom: 1px solid black;
+    }
+}
+
+.user {
+    color: rgba(black, 0.8);
+    border-bottom: 1px solid transparent;
+
+    @media (max-width: 1100px) {
+        font-size: 0.7rem;
+    }
+
+    @media (max-width: 750px) {
+        font-size: 0.6rem;
+    }
+}
+
+.userOnHover {
+    position: relative;
+    z-index: 30;
+    &:hover {
+        border-bottom: 1px solid black;
+    }
+}
+
+.comments {
+    font-size: 1rem;
+    margin-left: 0.2rem;
+    color: rgb(135, 138, 140);
+
+    @media (max-width: 750px) {
+        font-size: 0.8rem;
+    }
+
+    &_container {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.link {
+    width: 100%;
+    height: 110%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 20;
+}

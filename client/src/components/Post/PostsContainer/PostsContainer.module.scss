@@ -1,0 +1,11 @@
+.container {
+    margin: 2rem;
+    width: 100%;
+
+    @media(max-width: 750px) {
+        margin: 0;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+    }
+}

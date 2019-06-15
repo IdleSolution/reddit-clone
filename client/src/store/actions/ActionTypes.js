@@ -1,0 +1,11 @@
+export const SHOW_ERROR = "SHOW_ERROR";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
+export const SHOW_POPUP = "SHOW_REGISTRATION_POPUP";
+export const REMOVE_POPUP = "REMOVE_REGISTRATION_POPUP";
+
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
+
+export const START_LOADING = "START_LOADING";
+export const STOP_LOADING = "STOP_LOADING";

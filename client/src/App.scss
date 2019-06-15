@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 66.6%;
+    box-sizing: border-box;
+    font-family: "Lato", sans-serif;
+    background: #bacadd99;
+
+    @media (max-width: 1200px) {
+        font-size: 56.25%;
+
+    }
+
+    @media (max-width: 900px) {
+        font-size: 50%;
+
+    }
+
+    @media (max-width: 600px) {
+        font-size: 43.75%;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

@@ -1,0 +1,50 @@
+.btn {
+    &__primary {
+        border-radius: 4px;
+        display: inline-block;
+        font-weight: bold;
+        cursor: pointer;
+        font-family: 'IPMPlexSans', 'sans-serif';
+        &_blue {
+            background-color: rgb(0, 121, 211);
+            color: #fff;
+            border: 1px solid rgb(0, 121, 211);
+
+            &:hover {
+                border: 1px solid rgba(0, 121, 211, .8);
+                background-color: rgba(0, 121, 211, .8);
+
+            }
+        }
+
+        &_white {
+            border: 1px solid rgb(0, 121, 211);
+            background: #fff;
+            color: rgb(0, 121, 211);
+
+            &:hover {
+                border: 1px solid rgba(0, 121, 211, .8);
+                color: rgba(0, 121, 211, .8);
+
+            }
+        }
+    }
+
+    &__responsive {
+        font-size: .8rem;
+        padding: .7rem .2rem;
+        @media(max-width: 1200px) {
+            padding: .5rem .1rem;
+            font-size: .6rem;
+        }
+
+        @media(max-width: 850px) {
+            font-size: .5rem;
+        }
+    }
+}
+
+.link {
+    text-align: center;
+    text-decoration: none;
+}

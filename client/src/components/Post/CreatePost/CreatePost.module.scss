@@ -1,0 +1,69 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    // margin-top: 10%;
+}
+
+.card {
+    background: #fff;
+    // padding: 2rem;
+    padding: 5rem 2rem 10rem 2rem;
+    width: 30%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    position: absolute;
+    top: 20%;
+
+    @media(max-width: 900px) {
+        width: 50%;
+    }
+
+    @media(max-height: 670px) {
+        padding: 1rem 2rem 3rem 2rem;
+    }
+
+
+}
+
+.heading {
+    text-align: center;
+    font-size: 2.3rem;
+    margin-bottom: 2rem;
+
+    @media(max-width: 1000px) {
+        font-size: 2rem;
+    }
+
+    @media(max-width: 800px) {
+        font-size: 1.8rem;
+    }
+
+    @media(max-width: 600px) {
+        font-size: 1.6rem;
+    }
+
+    @media(max-width: 500px) {
+        font-size: 1.4rem;
+    }
+}
+
+.error {
+    color: red;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    font-size: .8rem;
+    text-align: center;
+
+    @media(max-width: 1200px) {
+        font-size: .6rem;
+    }
+
+    @media(max-width: 750px) {
+        bottom: 2%;
+        right: 50%;
+        transform: translateX(50%)
+    }
+}

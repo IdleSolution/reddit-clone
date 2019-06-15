@@ -1,0 +1,43 @@
+.container {
+    position: relative;
+}
+
+.textArea {
+    resize: none;
+    border: 1px solid #a5a3a3;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:focus, &:active {
+        border: 1px solid rgb(128, 126, 126);
+    }
+
+    &::placeholder {
+        font-family: 'K2D';
+        font-size: .9rem;
+
+    }
+
+    &:placeholder-shown + .dummyPlaceholder {
+        font-size: 1rem;
+        transform: translateY(-4rem);
+        opacity: 0;
+        visibility: hidden
+    }
+
+    @media(max-width: 600px) {
+        height: 1rem;
+    }
+
+
+}
+
+.dummyPlaceholder {
+    color: rgb(167, 164, 164);
+    font-family: 'K2D';
+    font-size: .8rem;
+    position: absolute;
+    top: 102%;
+    left: 5%;
+    transition: all .5s;
+}

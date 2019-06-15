@@ -1,0 +1,38 @@
+.votes {
+    width: 5%;
+    display: flex;
+    // justify-content: center;
+    flex-flow: column;
+    align-items: center;
+    cursor: pointer;
+
+    @media(max-width: 1000px) {
+        width: 10%;
+    }
+
+    @media(max-width: 750px) {
+        width: 15%;
+    }
+}
+
+.voteImg {
+    width: 1rem;
+}
+
+.voteScore {
+    font-size: .8rem;
+    font-weight: 700;
+    margin: .2rem 0;
+}
+
+.voteHidden {
+    display: none;
+}
+
+.vote {
+    font-size: 1.1rem;
+}
+
+.redVote {
+    color: rgb(206, 23, 19);
+}

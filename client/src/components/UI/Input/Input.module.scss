@@ -1,0 +1,93 @@
+@keyframes animateErrors {
+    0% {
+        color: rgb(221, 92, 92);
+    }
+
+    40% {
+        color: red;
+    }
+
+    70% {
+        color: rgb(221, 92, 92);
+    }
+
+    100% {
+        color: red;
+
+    }
+}
+
+.input {
+    padding: .7rem 1.2rem;
+    border: none;
+    border: 1px solid rgb(165, 163, 163);
+    width: 17rem;
+
+    // Whole animation breaks when the margin is not here. Dont touch pls
+    margin-bottom: 2rem;
+
+    &::placeholder {
+        font-family: 'K2D';
+        font-size: .9rem;
+    }
+
+    &:active, &:focus {
+        border: 1px solid rgb(128, 126, 126);
+    }
+
+    &:placeholder-shown + .dummyPlaceholder {
+        font-size: 1rem;
+        transform: translateY(-2rem);
+        opacity: 0;
+        visibility: hidden
+    }
+
+    &Container {
+        position: relative;
+    }
+
+    @media(max-width: 1200px) {
+        width: 14rem;
+    }
+
+    @media(max-width: 900px) {
+        padding: .6rem .6rem;
+    }
+
+    @media(max-width: 750px) {
+        padding: .4rem .4rem;
+        width: 12rem;
+    }
+
+    @media(max-width: 600px) {
+        width: 15rem;
+        padding: .6rem 1rem;
+    }
+
+    @media(max-width: 450px) {
+        width: 11rem;
+        padding: .4rem .8rem;
+    }
+}
+
+.dummyPlaceholder {
+    color: rgb(167, 164, 164);
+    font-family: 'K2D';
+    font-size: .8rem;
+    position: absolute;
+    top: 65%;
+    left: 5%;
+    transition: all .5s;
+}
+
+.error {
+    font-size: .7rem;
+    height: 1rem;
+    color: red;
+}
+
+.error_animated {
+    position: relative;
+    animation-name: animateErrors;
+    animation-duration: 1s;
+}
