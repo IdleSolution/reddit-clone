@@ -7,7 +7,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "bcrypt": "^3.0.3",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "chai-http": "^4.3.0",
     "cors": "^2.8.5",
@@ -17,7 +17,7 @@
     "knex": "^0.16.3",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "pg": "^7.8.0",
+    "pg": "^7.18.2",
     "validator": "^10.11.0"
   },
   "scripts": {

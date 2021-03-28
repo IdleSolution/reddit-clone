@@ -1,10 +1,11 @@
 module.exports = {
     development: {
         client: "pg",
-        version: "9.5",
+        version: "13.2",
+        port: 5432,
         connection: {
             host: "localhost",
-            user: "idlesolution",
+            user: "postgres",
             password: "cbdum123",
             database: "redditreact"
         }
@@ -20,10 +21,10 @@ module.exports = {
 
     test: {
         client: "pg",
-        version: "9.5",
+        version: "13.2",
         connection: {
             host: "localhost",
-            user: "idlesolution",
+            user: "postgres",
             password: "cbdum123",
             database: "redditreact_test"
         }
