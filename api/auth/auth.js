@@ -4,7 +4,7 @@ const validateRegister = require("./validation/register.js");
 const validateLogin = require("./validation/login.js");
 const bcrypt = require("bcrypt-nodejs");
 const knex = require("./../../database/knex.js");
-const saltRounds = 10;
+const saltRounds = bcrypt.genSaltSync(10);
 const jwt = require("jsonwebtoken");
 
 router.post("/register", (req, res) => {
@@ -26,8 +26,9 @@ router.post("/register", (req, res) => {
                     return res.status(400).json(errors);
                 }
 
-                bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+                bcrypt.hash(req.body.password, saltRounds, null, function (err, hash) {
                     if (err) {
+                        console.log(err);
                         return res.status(400).json({ errors: err });
                     }
 
@@ -65,8 +66,7 @@ router.post("/login", (req, res) => {
                 return res.status(400).json(errors);
             }
             bcrypt
-                .compare(req.body.password, data[0].password)
-                .then(matches => {
+                .compare(req.body.password, data[0].password, function (err, matches) {
                     if (matches) {
                         const payload = {
                             id: data[0].id,
@@ -93,7 +93,7 @@ router.post("/login", (req, res) => {
                         errors.password = "Password incorrect";
                         return res.status(400).json(errors);
                     }
-                });
+                })
         });
 });
 
