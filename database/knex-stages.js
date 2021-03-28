@@ -22,6 +22,7 @@ module.exports = {
               require: true,
               rejectUnauthorized: false
             }
+        }
     },
 
     test: {
@@ -34,4 +35,4 @@ module.exports = {
             database: "redditreact_test"
         }
     }
-};
+}
